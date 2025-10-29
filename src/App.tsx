@@ -1,24 +1,18 @@
-import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
-import TodosPage from "./pages/TodosPage";
-import ContactPage from "./pages/ContactPage";
-import "./App.css";
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
-export default function App() {
+function App() {
+
+
   return (
-    <BrowserRouter>
-      <header>
-        <nav className="nav">
-          <Link to="/todos">Todos</Link>
-          <Link to="/contact">Contact</Link>
-        </nav>
-      </header>
-      <main className="container">
-        <Routes>
-          <Route path="/" element={<Navigate to="/todos" replace />} />
-          <Route path="/todos" element={<TodosPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-        </Routes>
-      </main>
-    </BrowserRouter>
-  );
+    <>
+     <div>
+      <p>hello world</p>    
+     </div>
+    </>
+  )
 }
+
+export default App
