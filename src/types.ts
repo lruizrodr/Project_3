@@ -1,0 +1,8 @@
+export type Filter = 'all' | 'completed' | 'incomplete';
+
+export interface Todo {
+  id: string;
+  title: string;
+  completed: boolean;
+  createdAt: number;
+}
