@@ -1,18 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import TodoPage from "./components/pages/TodoPage";
+import ContactPage from "./components/pages/ContactPage";
 
 function App() {
-
-
   return (
-    <>
-     <div>
-      <p>hello world</p>    
-     </div>
-    </>
-  )
+    <BrowserRouter>
+      <NavBar />
+      <main>
+        <Routes>
+          <Route path="/" element={<Navigate to="/todos" replace />} />
+          <Route path="/todos" element={<TodoPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </main>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
