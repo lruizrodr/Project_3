@@ -1,0 +1,155 @@
+.todo-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 2rem;
+  padding: 3rem 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.todo-card {
+  background: rgba(20, 20, 20, 0.9);
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.todo-card:hover {
+  transform: translateY(-3px);
+}
+
+.todo-card h2 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  border-bottom: 1px solid #444;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  color: #a8b2ff;
+}
+
+form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+input[name="todoText"] {
+  flex: 1;
+  padding: 0.6rem;
+  border: 1px solid #555;
+  border-radius: 6px;
+  background: #111;
+  color: #fff;
+}
+
+button {
+  background: #4f6cff;
+  border: none;
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:hover {
+  filter: brightness(1.2);
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filters button.active {
+  background: #6b83ff;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.todo-list li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  background: #1a1a1a;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #333;
+}
+
+.todo-list li.done span {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.todo-list button {
+  background: #ff5b5b;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+}
+
+.empty {
+  color: #aaa;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* ✅ MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+  .todo-layout {
+    grid-template-columns: 1fr;
+    padding: 2rem 1rem;
+  }
+
+  form {
+    flex-direction: column;
+  }
+
+  input[name="todoText"] {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .filters {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .todo-card {
+    padding: 1rem;
+  }
+
+  .todo-list li {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .todo-layout {
+    gap: 1rem;
+  }
+
+  .todo-card h2 {
+    font-size: 1.2rem;
+  }
+
+  button {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}

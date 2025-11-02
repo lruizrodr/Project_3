@@ -36,7 +36,7 @@ function ProjectPage() {
             <h3>👤 User Stories</h3>
             <ol>
               <li>As a user, I want to add, complete, and delete tasks so I can manage my daily workflow.</li>
-              <li>As a user, I want to view and edit contact details to keep team members’ information up to date.</li>
+              <li>As a user, I want to view and edit contact details to keep team member's information up to date.</li>
               <li>As a user, I want to mark contacts online/offline to simulate team availability.</li>
               <li>As a user, I want the application to remember my data between sessions.</li>
             </ol>

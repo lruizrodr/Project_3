@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from "react";
+import "./TodoPage.css";
 
 type Todo = { id: number; text: string; completed: boolean };
 type Filter = "all" | "completed" | "incomplete";
@@ -23,12 +24,12 @@ function reducer(state: State, action: Action): State {
     case "toggle":
       return {
         ...state,
-        todos: state.todos.map(t =>
+        todos: state.todos.map((t) =>
           t.id === action.id ? { ...t, completed: !t.completed } : t
         ),
       };
     case "remove":
-      return { ...state, todos: state.todos.filter(t => t.id !== action.id) };
+      return { ...state, todos: state.todos.filter((t) => t.id !== action.id) };
     case "filter":
       return { ...state, filter: action.filter };
     case "load":
@@ -50,7 +51,7 @@ function TodoPage() {
     localStorage.setItem("todos", JSON.stringify(state.todos));
   }, [state.todos]);
 
-  const visibleTodos = state.todos.filter(todo => {
+  const visibleTodos = state.todos.filter((todo) => {
     if (state.filter === "completed") return todo.completed;
     if (state.filter === "incomplete") return !todo.completed;
     return true;
@@ -58,7 +59,7 @@ function TodoPage() {
 
   function handleAdd(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const input = (e.currentTarget.elements.namedItem("todoText") as HTMLInputElement);
+    const input = e.currentTarget.elements.namedItem("todoText") as HTMLInputElement;
     const text = input.value.trim();
     if (text) {
       dispatch({ type: "add", text });
@@ -67,54 +68,58 @@ function TodoPage() {
   }
 
   return (
-    <section>
-      <h2>Todos</h2>
-      <form onSubmit={handleAdd}>
-          <div className="todo-controls">
-            <input name="todoText" placeholder="New task..." />
-            <button type="submit">Add</button>
-
-            <div className="filters">
-              <button
-                className={state.filter === "all" ? "active" : ""}
-                onClick={() => dispatch({ type: "filter", filter: "all" })}
-                type="button"
-              >
-                All
-              </button>
-              <button
-                className={state.filter === "completed" ? "active" : ""}
-                onClick={() => dispatch({ type: "filter", filter: "completed" })}
-                type="button"
-              >
-                Completed
-              </button>
-              <button
-                className={state.filter === "incomplete" ? "active" : ""}
-                onClick={() => dispatch({ type: "filter", filter: "incomplete" })}
-                type="button"
-              >
-                Incomplete
-              </button>
-            </div>
-          </div>
+    <section className="todo-layout">
+      {/* Left Card — Controls */}
+      <div className="todo-card controls">
+        <h2>Manage Todos</h2>
+        <form onSubmit={handleAdd}>
+          <input name="todoText" placeholder="New task..." />
+          <button type="submit">Add</button>
         </form>
 
-      <ul>
-        {visibleTodos.map(todo => (
-          <li key={todo.id}>
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => dispatch({ type: "toggle", id: todo.id })}
-            />
-            <span style={{ textDecoration: todo.completed ? "line-through" : "none" }}>
-              {todo.text}
-            </span>
-            <button onClick={() => dispatch({ type: "remove", id: todo.id })}>X</button>
-          </li>
-        ))}
-      </ul>
+        <div className="filters">
+          <button
+            onClick={() => dispatch({ type: "filter", filter: "all" })}
+            className={state.filter === "all" ? "active" : ""}
+          >
+            All
+          </button>
+          <button
+            onClick={() => dispatch({ type: "filter", filter: "completed" })}
+            className={state.filter === "completed" ? "active" : ""}
+          >
+            Completed
+          </button>
+          <button
+            onClick={() => dispatch({ type: "filter", filter: "incomplete" })}
+            className={state.filter === "incomplete" ? "active" : ""}
+          >
+            Incomplete
+          </button>
+        </div>
+      </div>
+
+      {/* Right Card — List */}
+      <div className="todo-card list">
+        <h2>Your Tasks</h2>
+        {visibleTodos.length === 0 ? (
+          <p className="empty">No tasks yet. Add one above!</p>
+        ) : (
+          <ul className="todo-list">
+            {visibleTodos.map((todo) => (
+              <li key={todo.id} className={todo.completed ? "done" : ""}>
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => dispatch({ type: "toggle", id: todo.id })}
+                />
+                <span>{todo.text}</span>
+                <button onClick={() => dispatch({ type: "remove", id: todo.id })}>X</button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </section>
   );
 }
