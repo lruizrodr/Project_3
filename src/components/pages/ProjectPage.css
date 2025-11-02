@@ -1,0 +1,63 @@
+.project-page {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 2rem;
+  padding-top: 10rem;
+  border-radius: 10px;
+  max-width: 1000px;
+  margin: 2rem auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  font-family: system-ui, sans-serif;
+}
+
+.readme-card, .stories-card {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.readme-card ul {
+  list-style-type: square;
+  margin-left: 1.5rem;
+}
+
+.toggle-btn {
+  background: #4f6cff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+.toggle-btn:hover {
+  filter: brightness(1.1);
+}
+
+.wireframes {
+  margin-top: 2rem;
+}
+
+.wireframe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.wireframe-card {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.wireframe-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  border: 1px solid #444;
+}
