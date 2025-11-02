@@ -16,7 +16,7 @@ function ContactPage() {
       ? JSON.parse(stored)
       : [
           { id: 1, firstName: "Lucía", lastName: "Rivers", email: "lucia@example.com", comments: "Working on schedule", online: true },
-          { id: 2, firstName: "Ethan", lastName: "Park", email: "ethan@bootcamp.dev", comments: "Frontend mentor", online: false },
+          { id: 2, firstName: "Ethan", lastName: "Park", email: "ethan@example.com", comments: "Frontend mentor", online: false },
           { id: 3, firstName: "Ava", lastName: "Thompson", email: "ava.t@example.com", comments: "Collaborator", online: true },
           { id: 4, firstName: "Noah", lastName: "Kim", email: "noah.kim@example.com", comments: "UX designer", online: false },
         ];
@@ -150,15 +150,16 @@ function ContactPage() {
               value={form.comments}
               onChange={handleChange}
             />
-            <label>
+            <div className="status-field">
               <input
                 type="checkbox"
                 name="online"
                 checked={form.online}
                 onChange={handleChange}
+                id="online"
               />
-              Online
-            </label>
+              <label htmlFor="online">Online</label>
+            </div>
             <button type="submit">Save Changes</button>
           </form>
         )}
