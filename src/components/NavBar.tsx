@@ -7,7 +7,7 @@ function NavBar() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <h1 className="navbar-logo">Task Manager</h1>
+        <h1 className="navbar-logo">Concrete Task Manager</h1>
         <div className="navbar-links">
           <Link
             to="/todos"

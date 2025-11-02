@@ -70,15 +70,35 @@ function TodoPage() {
     <section>
       <h2>Todos</h2>
       <form onSubmit={handleAdd}>
-        <input name="todoText" placeholder="New task..." />
-        <button type="submit">Add</button>
-      </form>
+          <div className="todo-controls">
+            <input name="todoText" placeholder="New task..." />
+            <button type="submit">Add</button>
 
-      <div>
-        <button onClick={() => dispatch({ type: "filter", filter: "all" })}>All</button>
-        <button onClick={() => dispatch({ type: "filter", filter: "completed" })}>Completed</button>
-        <button onClick={() => dispatch({ type: "filter", filter: "incomplete" })}>Incomplete</button>
-      </div>
+            <div className="filters">
+              <button
+                className={state.filter === "all" ? "active" : ""}
+                onClick={() => dispatch({ type: "filter", filter: "all" })}
+                type="button"
+              >
+                All
+              </button>
+              <button
+                className={state.filter === "completed" ? "active" : ""}
+                onClick={() => dispatch({ type: "filter", filter: "completed" })}
+                type="button"
+              >
+                Completed
+              </button>
+              <button
+                className={state.filter === "incomplete" ? "active" : ""}
+                onClick={() => dispatch({ type: "filter", filter: "incomplete" })}
+                type="button"
+              >
+                Incomplete
+              </button>
+            </div>
+          </div>
+        </form>
 
       <ul>
         {visibleTodos.map(todo => (

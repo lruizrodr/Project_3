@@ -13,6 +13,35 @@
   align-items: start;
 }
 
+.todo-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.todo-controls input[type="text"] {
+  flex: 1;
+  padding: 0.55rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #555;
+  background: #2b2b2b;
+  color: #fff;
+}
+
+.todo-controls button {
+  background: #4f6cff;
+  color: white;
+  padding: 0.55rem 0.9rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.todo-controls button:hover {
+  background: #6378ff;
+}
+
 @media (max-width: 768px) {
   .todos-layout {
     grid-template-columns: 1fr;
@@ -56,8 +85,8 @@ button.danger { background: #ff5b5b; }
 
 .filters {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
-  margin-top: 0.75rem;
 }
 .filters .active {
   background: #222;
@@ -104,7 +133,10 @@ html, body {
 #root {
   min-height: 100vh;
   width: 100%;
-  background-color: #000; /* same exact color — no difference */
+  background: url(assets/background.jpg);
+  background-position: fixed;
+  background-size: cover;
+  background-color: #000;
   color: #f0f0f0;
   display: flex;
   flex-direction: column;
@@ -116,4 +148,21 @@ main {
   justify-content: center;
   align-items: flex-start;
   padding: 2rem;
+}
+
+.status-field {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.8rem;
+}
+
+.status-field input[type="checkbox"] {
+  transform: scale(1.2);
+  accent-color: #4f6cff;
+}
+
+.status-field label {
+  font-weight: 500;
+  color: #ddd;
 }
