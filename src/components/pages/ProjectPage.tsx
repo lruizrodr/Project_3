@@ -60,6 +60,6 @@ function ProjectPage() {
       </div>
     </section>
   );
-}
+} 
 
 export default ProjectPage;

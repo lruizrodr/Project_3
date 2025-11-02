@@ -10,6 +10,7 @@ type Contact = {
   online: boolean;
 };
 
+
 function ContactPage() {
   const [contacts, setContacts] = useState<Contact[]>(() => {
     const stored = localStorage.getItem("contacts");
@@ -30,7 +31,7 @@ function ContactPage() {
     email: "",
     comments: "",
     online: false,
-  });
+  }); 
 
   useEffect(() => {
     localStorage.setItem("contacts", JSON.stringify(contacts));

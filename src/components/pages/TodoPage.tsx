@@ -38,7 +38,7 @@ function reducer(state: State, action: Action): State {
       return state;
   }
 }
-
+ 
 function TodoPage() {
   const [state, dispatch] = useReducer(reducer, { todos: [], filter: "all" });
 
