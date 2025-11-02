@@ -28,25 +28,6 @@ main {
   padding: 4rem;
 }
 
-/* Contact Status checkbox styling */
-.status-field {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin-top: 0.8rem;
-}
-
-.status-field input[type="checkbox"] {
-  transform: scale(1.2);
-  accent-color: #4f6cff;
-}
-
-.status-field label {
-  font-weight: 500;
-  color: #ddd;
-}
-
-/* MOBILE OPTIMIZATION */
 @media (max-width: 768px) {
   main {
     padding: 2rem 1rem;

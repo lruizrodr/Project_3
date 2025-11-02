@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "./ContactPage.css";
 
 type Contact = {
   id: number;
