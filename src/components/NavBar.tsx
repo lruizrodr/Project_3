@@ -1,11 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import "./NavBar.css";
 
 function NavBar() {
+  const { pathname } = useLocation();
+
   return (
-    <nav>
-      <h2>Task Manager</h2>
-      <div>
-        <Link to="/todos">Todos</Link> | <Link to="/contact">Contact</Link>
+    <nav className="navbar">
+      <div className="navbar-container">
+        <h1 className="navbar-logo">Task Manager</h1>
+        <div className="navbar-links">
+          <Link
+            to="/todos"
+            className={pathname === "/todos" ? "nav-link active" : "nav-link"}
+          >
+            Todos
+          </Link>
+          <Link
+            to="/contact"
+            className={pathname === "/contact" ? "nav-link active" : "nav-link"}
+          >
+            Contact
+          </Link>
+        </div>
       </div>
     </nav>
   );

@@ -1,0 +1,65 @@
+/* === NAVBAR STYLING === */
+.navbar {
+  background: #1e1e1e; /* dark bar for contrast */
+  color: #fff;
+  border-bottom: 1px solid #2c2c2c;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* flexbox container */
+.navbar-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* logo / title */
+.navbar-logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+/* link section */
+.navbar-links {
+  display: flex;
+  gap: 1rem;
+}
+
+/* links */
+.nav-link {
+  text-decoration: none;
+  color: #ddd;
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* hover + active */
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.nav-link.active {
+  background-color: #4f6cff;
+  color: #fff;
+}
+
+/* responsive tweak */
+@media (max-width: 600px) {
+  .navbar-container {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+}

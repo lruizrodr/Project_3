@@ -1,66 +1,170 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+type Contact = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  comments: string;
+  online: boolean;
+};
 
 function ContactPage() {
-  const [form, setForm] = useState({
+  const [contacts, setContacts] = useState<Contact[]>(() => {
+    const stored = localStorage.getItem("contacts");
+    return stored
+      ? JSON.parse(stored)
+      : [
+          { id: 1, firstName: "Lucía", lastName: "Rivers", email: "lucia@example.com", comments: "Working on schedule", online: true },
+          { id: 2, firstName: "Ethan", lastName: "Park", email: "ethan@bootcamp.dev", comments: "Frontend mentor", online: false },
+          { id: 3, firstName: "Ava", lastName: "Thompson", email: "ava.t@example.com", comments: "Collaborator", online: true },
+          { id: 4, firstName: "Noah", lastName: "Kim", email: "noah.kim@example.com", comments: "UX designer", online: false },
+        ];
+  });
+
+  const [selected, setSelected] = useState<Contact | null>(null);
+  const [form, setForm] = useState<Omit<Contact, "id">>({
     firstName: "",
     lastName: "",
     email: "",
     comments: "",
+    online: false,
   });
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    const { name, value } = e.target;
-    setForm(prev => ({ ...prev, [name]: value }));
+  useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  }, [contacts]);
+
+  function handleSelect(contact: Contact) {
+    setSelected(contact);
+    setForm({
+      firstName: contact.firstName,
+      lastName: contact.lastName,
+      email: contact.email,
+      comments: contact.comments,
+      online: contact.online,
+    });
   }
 
-  function handleSubmit(e: React.FormEvent) {
+ function handleChange(
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+) {
+  const { name, value, type } = e.target;
+  const newValue =
+    type === "checkbox" && e.target instanceof HTMLInputElement
+      ? e.target.checked
+      : value;
+
+  setForm(prev => ({
+    ...prev,
+    [name]: newValue,
+  }));
+}
+
+  function handleSave(e: React.FormEvent) {
     e.preventDefault();
-    alert("Form Submitted!\n" + JSON.stringify(form, null, 2));
+    if (!selected) return;
+
+    const updated = contacts.map(c =>
+      c.id === selected.id ? { ...c, ...form } : c
+    );
+    setContacts(updated);
+    setSelected(null);
+    setForm({
+      firstName: "",
+      lastName: "",
+      email: "",
+      comments: "",
+      online: false,
+    });
   }
 
   return (
-    <section>
-      <h2>Contact</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            name="firstName"
-            placeholder="First Name"
-            value={form.firstName}
-            onChange={handleChange}
-          />
-          <input
-            name="lastName"
-            placeholder="Last Name"
-            value={form.lastName}
-            onChange={handleChange}
-          />
-        </div>
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-        />
-        <textarea
-          name="comments"
-          placeholder="Comments"
-          value={form.comments}
-          onChange={handleChange}
-        />
-        <button type="submit">Send</button>
-      </form>
+    <section className="contact-section">
+      <h2>Contact List</h2>
+
+      <div className="contact-list">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {contacts.map(c => (
+              <tr key={c.id}>
+                <td>{c.firstName} {c.lastName}</td>
+                <td>{c.email}</td>
+                <td>
+                  <span
+                    className={`status ${c.online ? "online" : "offline"}`}
+                    onClick={() =>
+                      setContacts(prev =>
+                        prev.map(p =>
+                          p.id === c.id ? { ...p, online: !p.online } : p
+                        )
+                      )
+                    }
+                  >
+                    {c.online ? "🟢 Online" : "⚪ Offline"}
+                  </span>
+                </td>
+                <td>
+                  <button onClick={() => handleSelect(c)}>Edit</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="contact-form">
+        <h3>{selected ? "Edit Contact" : "Select a Contact"}</h3>
+        {selected && (
+          <form onSubmit={handleSave}>
+            <input
+              name="firstName"
+              placeholder="First Name"
+              value={form.firstName}
+              onChange={handleChange}
+            />
+            <input
+              name="lastName"
+              placeholder="Last Name"
+              value={form.lastName}
+              onChange={handleChange}
+            />
+            <input
+              name="email"
+              placeholder="Email"
+              type="email"
+              value={form.email}
+              onChange={handleChange}
+            />
+            <textarea
+              name="comments"
+              placeholder="Comments"
+              value={form.comments}
+              onChange={handleChange}
+            />
+            <label>
+              <input
+                type="checkbox"
+                name="online"
+                checked={form.online}
+                onChange={handleChange}
+              />
+              Online
+            </label>
+            <button type="submit">Save Changes</button>
+          </form>
+        )}
+      </div>
     </section>
   );
 }
 
 export default ContactPage;
-
-//# User Stories
-//  1) As a user, I can add a new todo item so that I don’t forget tasks I need to do.
-//  - Acceptance: Typing in the New Task field and pressing Add shows the item immediately at the top of the list.
-//  2) As a user, I can mark a todo as completed so I can clearly see what’s done.
-//  - Acceptance: Clicking the checkbox toggles the item and applies a strike-through style when completed.
-//  3) As a user, I can filter my todos by All, Completed, or Incomplete so I can focus on what matters.
-//  - Acceptance: Clicking a filter button updates the list without page reload; the active filter is visually highlighted.
